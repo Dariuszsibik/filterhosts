@@ -5,44 +5,31 @@ import ProductRow from './ProductRow';
 class ProductTable extends React.Component {
     render() {
       const filterText = this.props.filterText;
-      const inStockOnly = this.props.inStockOnly;
+      const przekierowanie = this.props.przekierowanie;
 
-      const rows = [];
       let lastCategory = null;
 
-      //trzeba użyć map, filter tak aby map tylko mapowało faktyczną tablicę już przefiltrowaną.
-
-      this.props.data.forEach((product) => {
-        if (product.name.indexOf(filterText) === -1) {
-          return;
-        }
-        if (inStockOnly && !product.stocked) {
-          return;
-        }
-        if (product.category !== lastCategory) {
-          rows.push(
-            <ProductCategoryRow
-              category={product.category}
-              key={product.category} />
-          );
-        }
-        rows.push(
-          <ProductRow
-            product={product}
-            key={product.name}
-          />
-        );
-        lastCategory = product.category;
-      });
+      const rows = this.props.data
+      .filter((el, i) => {
+          return el.name.toUpperCase().includes(filterText.toUpperCase());
+      })
+      .filter((el, i) => {
+          if (przekierowanie) {
+               return el.direction === !przekierowanie;
+          } else {
+              return true;
+          }
+      })
+      .map((el, i) => {
+          return (<ProductRow
+                    key={i}
+                    object={el}
+               />)
+      })
 
       return (
         <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Price</th>
-            </tr>
-          </thead>
+          <ProductCategoryRow/>
           <tbody>{rows}</tbody>
         </table>
       );

@@ -7,7 +7,7 @@ class FilterableProductTable extends React.Component {
       super(props);
       this.state = {
         filterText: '',
-        inStockOnly: false
+        przekierowanie: false
       };
       
       this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
@@ -20,9 +20,9 @@ class FilterableProductTable extends React.Component {
       });
     }
 
-    handleInStockChange(inStockOnly) {
+    handleInStockChange(przekierowanie) {
       this.setState({
-        inStockOnly: inStockOnly
+        przekierowanie: przekierowanie
       })
     }
   
@@ -31,14 +31,14 @@ class FilterableProductTable extends React.Component {
         <div>
           <SearchBar
             filterText={this.state.filterText}
-            inStockOnly={this.state.inStockOnly}
+            przekierowanie={this.state.przekierowanie}
             onFilterTextChange={this.handleFilterTextChange}
             onInStockChange={this.handleInStockChange}
           />
           <ProductTable
             data={this.props.data}
             filterText={this.state.filterText}
-            inStockOnly={this.state.inStockOnly}
+            przekierowanie={this.state.przekierowanie}
           />
         </div>
       );

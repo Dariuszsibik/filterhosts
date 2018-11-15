@@ -27,11 +27,11 @@ class SearchBar extends React.Component {
           <p>
             <input
               type="checkbox"
-              checked={this.props.inStockOnly}
+              checked={this.props.przekierowanie}
               onChange={this.handleInStockChange}
             />
             {' '}
-            Only show products in stock
+            Wyświetl witryny bez przekierowania
           </p>
         </form>
       );
